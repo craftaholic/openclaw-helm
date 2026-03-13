@@ -31,7 +31,8 @@ secret:
 	@source .env && \
 		export OPENCLAW_GATEWAY_TOKEN=$${OPENCLAW_GATEWAY_TOKEN:-$$(openssl rand -hex 32)} && \
 		export OPENCLAW_PRIMARY_MODEL=$${OPENCLAW_PRIMARY_MODEL:-$(DEFAULT_MODEL)} && \
-		kubectl create namespace $(NAMESPACE) --dry-run=client -o yaml | kubectl apply -f - && \
+		kubectl get ns $(NAMESPACE) &>/dev/null || kubectl create ns $(NAMESPACE) && \
+		kubectl label ns $(NAMESPACE) pod-security.kubernetes.io/enforce=privileged pod-security.kubernetes.io/audit=privileged pod-security.kubernetes.io/warn=privileged --overwrite && \
 		kubectl delete secret $(SECRET_NAME) -n $(NAMESPACE) --ignore-not-found=true 2>/dev/null || true && \
 		kubectl create secret generic $(SECRET_NAME) -n $(NAMESPACE) \
 			--from-literal=OPENCODE_API_KEY="$$OPENCODE_API_KEY" \
