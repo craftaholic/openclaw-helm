@@ -118,9 +118,9 @@ app-template:
           env:
             CONFIG_MODE: "{{ .Values.configMode | default \"merge\" }}"
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
             capabilities:
@@ -220,9 +220,9 @@ app-template:
             HOME: /tmp
             NPM_CONFIG_CACHE: /tmp/.npm
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
             capabilities:
@@ -268,9 +268,9 @@ app-template:
           #   # For internal CA trust (Python requests library)
           #   REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-bundle.crt
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
             readOnlyRootFilesystem: false
             allowPrivilegeEscalation: false
             capabilities:
@@ -357,9 +357,9 @@ app-template:
             # Fontconfig cache needs a writable directory
             XDG_CACHE_HOME: /tmp
           securityContext:
-            runAsUser: 0
-            runAsGroup: 0
-            runAsNonRoot: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
             capabilities:
