@@ -23,6 +23,11 @@ app-template:
       fsGroup: 1000
       # @schema type:string;enum:[Always, OnRootMismatch];default:OnRootMismatch
       fsGroupChangePolicy: OnRootMismatch
+    # -- Tolerations to allow pods to run on control-plane node
+    tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Exists"
+        effect: "NoSchedule"
 
   controllers:
     main:
@@ -263,10 +268,10 @@ app-template:
           #   # For internal CA trust (Python requests library)
           #   REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-bundle.crt
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: 0
+            runAsGroup: 0
             runAsNonRoot: true
-            readOnlyRootFilesystem: true
+            readOnlyRootFilesystem: false
             allowPrivilegeEscalation: false
             capabilities:
               drop:
