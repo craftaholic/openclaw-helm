@@ -248,7 +248,9 @@ app-template:
             - "18789"
           # Reference a secret containing environment variables (e.g., API keys)
           # Create this secret manually or via external-secrets/vault-operator
-          envFrom: []
+          envFrom:
+          - secretRef:
+              name: openclaw-env
           # Example:
           # - secretRef:
           #     name: openclaw-env-secret
@@ -442,11 +444,40 @@ app-template:
             "gateway": {
               "port": 18789,
               "mode": "local",
+              "auth": {
+                "token": "${OPENCLAW_GATEWAY_TOKEN}"
+              },
+              "controlUi": {
+                "dangerouslyAllowHostHeaderOriginFallback": true
+              },
               // IMPORTANT: trustedProxies uses exact IP matching only
               // - CIDR notation is NOT supported - list each proxy IP individually
               // - IPv6 exact addresses may work but are untested
               // - Recommend single-stack IPv4 deployments for simplicity
               "trustedProxies": ["10.0.0.1"]
+            },
+
+            // Models configuration (MiniMax provider)
+            "models": {
+              "mode": "merge",
+              "providers": {
+                "minimax": {
+                  "baseUrl": "https://api.minimax.io/anthropic",
+                  "apiKey": "${MINIMAX_API_KEY}",
+                  "api": "anthropic-messages",
+                  "models": [
+                    {
+                      "id": "MiniMax-M2.5",
+                      "name": "MiniMax M2.5",
+                      "reasoning": true,
+                      "input": ["text"],
+                      "cost": { "input": 0.3, "output": 1.2, "cacheRead": 0.03, "cacheWrite": 0.12 },
+                      "contextWindow": 200000,
+                      "maxTokens": 8192
+                    }
+                  ]
+                }
+              }
             },
 
             // Browser configuration (Chromium sidecar)
@@ -467,7 +498,7 @@ app-template:
                 "workspace": "/home/node/.openclaw/workspace",
                 "model": {
                   // Uses ANTHROPIC_API_KEY from environment
-                  "primary": "anthropic/claude-opus-4-6"
+                  "primary": "minimax/MiniMax-M2.5"
                 },
                 "userTimezone": "UTC",
                 "timeoutSeconds": 600,
@@ -609,7 +640,7 @@ app-template:
       accessMode: ReadWriteOnce
       # @schema type:string;default:5Gi
       # -- PVC storage size
-      size: 5Gi
+      size: 20Gi
       advancedMounts:
         main:
           init-config:

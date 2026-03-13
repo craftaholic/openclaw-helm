@@ -10,3 +10,9 @@ charts/*/Chart.lock
 # OS
 .DS_Store
 Thumbs.db
+
+# Environment files (contains secrets - DO NOT COMMIT)
+.env
+.env.*
+
+.sisyphus/
