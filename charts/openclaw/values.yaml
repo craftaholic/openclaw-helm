@@ -284,10 +284,10 @@ app-template:
               # @schema type:string;default:512Mi
               memory: 512Mi
             limits:
-              # @schema type:string;default:2000m
+              # @schema type:string;default:4000m
               cpu: 2000m
-              # @schema type:string;default:2Gi
-              memory: 2Gi
+              # @schema type:string;default:4Gi
+              memory: 4Gi
           probes:
             liveness:
               # @schema type:boolean;default:true
