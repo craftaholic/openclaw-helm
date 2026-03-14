@@ -307,7 +307,15 @@
                                                     }
                                                 },
                                                 "env": {
-                                                    "type": "object"
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "GIT_AUTHOR_EMAIL": {
+                                                            "type": "string"
+                                                        },
+                                                        "GIT_AUTHOR_NAME": {
+                                                            "type": "string"
+                                                        }
+                                                    }
                                                 },
                                                 "envFrom": {
                                                     "type": "array",

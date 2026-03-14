@@ -26,6 +26,8 @@ annotations:
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x663862EB60C50E04AD73F198CA0FB121610B01FF
   artifacthub.io/changes: |
     - kind: added
+      description: "Update github config"
+    - kind: added
       description: "Update mount path to whole HOME workspace"
     - kind: added
       description: "Enhance config"
