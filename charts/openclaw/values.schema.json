@@ -310,7 +310,20 @@
                                                     "type": "object"
                                                 },
                                                 "envFrom": {
-                                                    "type": "array"
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "secretRef": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "name": {
+                                                                        "type": "string"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 },
                                                 "image": {
                                                     "type": "object",
@@ -478,11 +491,11 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "cpu": {
-                                                                    "default": "2000m",
+                                                                    "default": "4000m",
                                                                     "type": "string"
                                                                 },
                                                                 "memory": {
-                                                                    "default": "2Gi",
+                                                                    "default": "4Gi",
                                                                     "type": "string"
                                                                 }
                                                             }
@@ -711,6 +724,24 @@
                                     ]
                                 }
                             }
+                        },
+                        "tolerations": {
+                            "description": "Tolerations to allow pods to run on control-plane node",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "effect": {
+                                        "type": "string"
+                                    },
+                                    "key": {
+                                        "type": "string"
+                                    },
+                                    "operator": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -871,6 +902,9 @@
                             }
                         }
                     }
+                },
+                "openclawRepository": {
+                    "type": "string"
                 },
                 "openclawVersion": {
                     "description": "OpenClaw image version (used by all OpenClaw containers)",

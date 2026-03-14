@@ -25,8 +25,104 @@ annotations:
     fingerprint: 663862EB60C50E04AD73F198CA0FB121610B01FF
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x663862EB60C50E04AD73F198CA0FB121610B01FF
   artifacthub.io/changes: |
+    - kind: added
+      description: "Update mount path to whole HOME workspace"
+    - kind: added
+      description: "Enhance config"
+    - kind: added
+      description: "Adding configuration for telegram"
+    - kind: added
+      description: "Update to use private image"
+    - kind: added
+      description: "Enhance performance"
+    - kind: added
+      description: "Revert permissions"
+    - kind: added
+      description: "Allow running as root"
+    - kind: added
+      description: "Update permission"
+    - kind: added
+      description: "Adding my own configuration"
     - kind: changed
-      description: "Bump OpenClaw to 2026.3.12"
+      description: "Bump openclaw to 2026.3.12"
+    - kind: changed
+      description: "Bump openclaw to 2026.3.11"
+    - kind: changed
+      description: "Bump chromium to 146.0.7680.72"
+    - kind: changed
+      description: "Bump openclaw to 2026.3.8, chromium to 146.0.7680.66"
+    - kind: changed
+      description: "Bump openclaw to 2026.3.7"
+    - kind: changed
+      description: "Bump openclaw to 2026.3.2"
+    - kind: changed
+      description: "Update commands to specify main container (#19)"
+    - kind: changed
+      description: "Refactor skill installation with retry logic (#20)"
+    - kind: changed
+      description: "Bump openclaw to 2026.3.1"
+    - kind: added
+      description: "Switch chromium sidecar to chromedp/headless-shell (#18)"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.26"
+    - kind: fixed
+      description: "Mount bash_aliases with openclaw command alias (#15)"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.25"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.24"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.23"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.22"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.21"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.19"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.17"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.15"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.14"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.13"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.12"
+    - kind: changed
+      description: "Add runtime dependency examples for pnpm and uv (#10)"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.9"
+    - kind: fixed
+      description: "Remove continue-on-error from schema generation and add .helmignore (#9)"
+    - kind: added
+      description: "Add PGP signing for ArtifactHub chart provenance (#8)"
+    - kind: added
+      description: "Add values.schema.json generation for ArtifactHub (#7)"
+    - kind: changed
+      description: "Update secret key name in README.md (#6)"
+    - kind: added
+      description: "Security hardening, version management, and chromium improvements (#3)"
+    - kind: fixed
+      description: "Point artifacthub badge to package URL"
+    - kind: fixed
+      description: "Resolve config merge, dynamic ConfigMap naming, and configMode wiring"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.6"
+    - kind: changed
+      description: "Bump openclaw to 2026.2.3"
+    - kind: fixed
+      description: "Fix(ci): prevent race condition between docs.yaml and release.yaml"
+    - kind: added
+      description: "CI/CD automation, config merge mode, and documentation improvements"
+    - kind: added
+      description: "Change default skill to weather and improve README"
+    - kind: added
+      description: "Add Chromium sidecar for browser automation"
+    - kind: added
+      description: "Add declarative skill management with init-skills"
+    - kind: added
+      description: "Initial commit"
   artifacthub.io/images: |
     - name: openclaw
       image: ghcr.io/openclaw/openclaw:2026.3.12
