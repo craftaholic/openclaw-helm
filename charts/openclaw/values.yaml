@@ -11,13 +11,13 @@ app-template:
   openclawVersion: "latest"
 
   openclawRepository: "tommytran2804/openclaw"
-
+  
   # @schema type:string
   # -- Chromium sidecar image version
   chromiumVersion: "146.0.7680.72"
   # @schema type:string;enum:[merge, overwrite];default:merge
   # -- Config mode: `merge` preserves runtime changes, `overwrite` for strict GitOps
-  configMode: merge
+  configMode: overwrite
 
   defaultPodOptions:
     # -- Pod security context
@@ -486,17 +486,6 @@ app-template:
                       "maxTokens": 8192
                     }
                   ]
-                },
-                "groq": {
-                  "apiKey": "${GROQ_API_KEY}",
-                  "models": [
-                    {
-                      "id": "whisper-large-v3",
-                      "name": "Whisper Large V3",
-                      "audio": true,
-                      "cost": { "input": 0 }
-                    }
-                  ]
                 }
               }
             },
@@ -560,11 +549,7 @@ app-template:
               "profile": "full",
               "media": {
                 "audio": {
-                  "enabled": true,
-                  "maxBytes": 20971520,
-                  "models": [
-                    { "provider": "groq", "model": "whisper-large-v3" }
-                  ]
+                  "enabled": true
                 }
               },
               "web": {
