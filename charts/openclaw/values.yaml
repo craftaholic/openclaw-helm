@@ -259,7 +259,9 @@ app-template:
           # Example:
           # - secretRef:
           #     name: openclaw-env-secret
-          env: {}
+          env:
+            GIT_AUTHOR_NAME: neo_bot
+            GIT_AUTHOR_EMAIL: tranthang.dev@gmail.com
           # Example: Add runtime dependency paths for skills and extra runtimes
           # env:
           #   PATH: /home/node/.openclaw/pnpm:/home/node/.openclaw/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
