@@ -563,7 +563,12 @@ app-template:
                   "enabled": true,
                   "maxBytes": 20971520,
                   "models": [
-                    { "provider": "openai", "model": "gpt-4o-mini-transcribe" }
+                    {
+                      "type": "cli",
+                      "command": "whisper",
+                      "args": ["-m", "~/.whisper/ggml-base.bin", "-f", "{{MediaPath}}", "-t"],
+                      "timeoutSeconds": 120
+                    }
                   ]
                 }
               },
