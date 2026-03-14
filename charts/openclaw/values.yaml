@@ -486,6 +486,17 @@ app-template:
                       "maxTokens": 8192
                     }
                   ]
+                },
+                "groq": {
+                  "apiKey": "${GROQ_API_KEY}",
+                  "models": [
+                    {
+                      "id": "whisper-large-v3",
+                      "name": "Whisper Large V3",
+                      "audio": true,
+                      "cost": { "input": 0 }
+                    }
+                  ]
                 }
               }
             },
@@ -547,6 +558,15 @@ app-template:
             // Tools configuration
             "tools": {
               "profile": "full",
+              "media": {
+                "audio": {
+                  "enabled": true,
+                  "maxBytes": 20971520,
+                  "models": [
+                    { "provider": "groq", "model": "whisper-large-v3" }
+                  ]
+                }
+              },
               "web": {
                 "search": {
                   "enabled": true
