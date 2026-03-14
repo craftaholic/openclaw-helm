@@ -517,7 +517,7 @@ app-template:
                   "id": "main",
                   "default": true,
                   "identity": {
-                    "name": "OpenClaw",
+                    "name": "Neo",
                     "emoji": "🦞"
                   }
                 }
@@ -547,7 +547,7 @@ app-template:
               "profile": "full",
               "web": {
                 "search": {
-                  "enabled": false
+                  "enabled": true
                 },
                 "fetch": {
                   "enabled": true
@@ -559,7 +559,7 @@ app-template:
             "channels": {
               "telegram": {
                 "botToken": "${TELEGRAM_BOT_TOKEN}",
-                "allowFrom": "${TELEGRAM_ALLOW_FROM}",
+                "allowFrom": ["${TELEGRAM_ALLOW_FROM}"],
                 "enabled": true
               }
             }
