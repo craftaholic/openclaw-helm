@@ -8,7 +8,10 @@
 app-template:
   # @schema type:string;required:true
   # -- OpenClaw image version (used by all OpenClaw containers)
-  openclawVersion: "2026.3.12"
+  openclawVersion: "latest"
+
+  openclawRepository: "tommytran2804/openclaw"
+
   # @schema type:string
   # -- Chromium sidecar image version
   chromiumVersion: "146.0.7680.72"
@@ -44,7 +47,7 @@ app-template:
         init-config:
           image:
             # @schema type:string;default:ghcr.io/openclaw/openclaw
-            repository: ghcr.io/openclaw/openclaw
+            repository: "{{ .Values.openclawRepository }}"
             # @schema type:string
             tag: "{{ .Values.openclawVersion }}"
           # -- Init-config startup script
@@ -116,7 +119,7 @@ app-template:
               fi
               log "Config initialization complete"
           env:
-            CONFIG_MODE: "{{ .Values.configMode | default \"merge\" }}"
+            CONFIG_MODE: '{{ .Values.configMode | default "merge" }}'
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -132,7 +135,7 @@ app-template:
         init-skills:
           image:
             # @schema type:string;default:ghcr.io/openclaw/openclaw
-            repository: ghcr.io/openclaw/openclaw
+            repository: "{{ .Values.openclawRepository }}"
             # @schema type:string
             tag: "{{ .Values.openclawVersion }}"
           # -- Init-skills startup script
@@ -235,7 +238,7 @@ app-template:
           image:
             # @schema type:string;default:ghcr.io/openclaw/openclaw
             # -- Container image repository
-            repository: ghcr.io/openclaw/openclaw
+            repository: "{{ .Values.openclawRepository }}"
             # @schema type:string
             # -- Container image tag
             tag: "{{ .Values.openclawVersion }}"
@@ -254,8 +257,8 @@ app-template:
           # Reference a secret containing environment variables (e.g., API keys)
           # Create this secret manually or via external-secrets/vault-operator
           envFrom:
-          - secretRef:
-              name: openclaw-env
+            - secretRef:
+                name: openclaw-env
           # Example:
           # - secretRef:
           #     name: openclaw-env-secret
