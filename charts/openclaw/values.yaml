@@ -244,7 +244,7 @@ app-template:
             tag: "{{ .Values.openclawVersion }}"
             # @schema type:string;enum:[Always, IfNotPresent, Never];default:IfNotPresent
             # -- Image pull policy
-            pullPolicy: IfNotPresent
+            pullPolicy: Always
           command:
             - node
             - dist/index.js
