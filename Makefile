@@ -38,6 +38,8 @@ secret:
 			--from-literal=OPENCODE_API_KEY="$$OPENCODE_API_KEY" \
 			--from-literal=OPENCLAW_GATEWAY_TOKEN="$$OPENCLAW_GATEWAY_TOKEN" \
 			--from-literal=OPENCLAW_PRIMARY_MODEL="$$OPENCLAW_PRIMARY_MODEL" \
+			--from-literal=TELEGRAM_BOT_TOKEN="$$TELEGRAM_BOT_TOKEN" \
+			--from-literal=TELEGRAM_ALLOW_FROM="$$TELEGRAM_ALLOW_FROM" \
 			--from-literal=MINIMAX_API_KEY="$$MINIMAX_API_KEY" && \
 		echo "Secret created!"
 

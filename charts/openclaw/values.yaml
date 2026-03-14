@@ -553,22 +553,16 @@ app-template:
                   "enabled": true
                 }
               }
-            }
+            },
 
             // Channel configuration can be added here:
-            // "channels": {
-            //   "telegram": {
-            //     "botToken": "${TELEGRAM_BOT_TOKEN}",
-            //     "enabled": true
-            //   },
-            //   "discord": {
-            //     "token": "${DISCORD_BOT_TOKEN}"
-            //   },
-            //   "slack": {
-            //     "botToken": "${SLACK_BOT_TOKEN}",
-            //     "appToken": "${SLACK_APP_TOKEN}"
-            //   }
-            // }
+            "channels": {
+              "telegram": {
+                "botToken": "${TELEGRAM_BOT_TOKEN}",
+                "allowFrom": "${TELEGRAM_ALLOW_FROM}",
+                "enabled": true
+              }
+            }
           }
 
   service:
