@@ -642,15 +642,15 @@ app-template:
       accessMode: ReadWriteOnce
       # @schema type:string;default:5Gi
       # -- PVC storage size
-      size: 20Gi
+      size: 30Gi
       advancedMounts:
         main:
           init-config:
-            - path: /home/node/.openclaw
+            - path: /home/node
           init-skills:
-            - path: /home/node/.openclaw
+            - path: /home/node
           main:
-            - path: /home/node/.openclaw
+            - path: /home/node
 
     # Writable /tmp for containers with readOnlyRootFilesystem
     tmp:
