@@ -14,7 +14,7 @@ app-template:
   
   # @schema type:string
   # -- Chromium sidecar image version
-  chromiumVersion: "146.0.7680.72"
+  chromiumVersion: "146.0.7680.80"
   # @schema type:string;enum:[merge, overwrite];default:merge
   # -- Config mode: `merge` preserves runtime changes, `overwrite` for strict GitOps
   configMode: overwrite
