@@ -3,8 +3,8 @@
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/openclaw-helm)](https://artifacthub.io/packages/helm/openclaw-helm/openclaw)
 [![Helm 3](https://img.shields.io/badge/Helm-3.0+-0f1689?logo=helm&logoColor=white)](https://helm.sh/)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-1.26+-326ce5?logo=kubernetes&logoColor=white)](https://kubernetes.io/)
-[![App Version](https://img.shields.io/badge/App_Version-2026.4.1-blue)](https://github.com/openclaw/openclaw)
-[![Chart Version](https://img.shields.io/badge/Chart_Version-1.4.16-blue)](https://github.com/serhanekicii/openclaw-helm)
+[![App Version](https://img.shields.io/badge/App_Version-2026.4.2-blue)](https://github.com/openclaw/openclaw)
+[![Chart Version](https://img.shields.io/badge/Chart_Version-1.4.17-blue)](https://github.com/serhanekicii/openclaw-helm)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Helm chart for deploying OpenClaw on Kubernetes — an AI assistant that connects to messaging platforms and executes tasks autonomously.
@@ -22,7 +22,7 @@ OpenClaw runs as a single-instance deployment (cannot scale horizontally):
 | Gateway | 18789 | Main HTTP/WebSocket interface |
 | Chromium | 9222 | Headless browser for automation (CDP, optional) |
 
-**App Version:** 2026.4.1
+**App Version:** 2026.4.2
 
 ---
 
@@ -104,7 +104,7 @@ app-template:
         main:
           image:
             repository: ghcr.io/your-org/openclaw-fork
-            tag: "2026.4.1"
+            tag: "2026.4.2"
 ```
 
 For images hosted in a private registry inside your cluster:
@@ -117,7 +117,7 @@ app-template:
         main:
           image:
             repository: registry.internal/openclaw
-            tag: "2026.4.1"
+            tag: "2026.4.2"
             pullPolicy: Always
 ```
 
@@ -145,7 +145,7 @@ All values are nested under `app-template:`. See [values.yaml](values.yaml) for 
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| app-template.chromiumVersion | string | `"147.0.7727.24"` | Chromium sidecar image version |
+| app-template.chromiumVersion | string | `"147.0.7727.50"` | Chromium sidecar image version |
 | app-template.configMaps.config.data."openclaw.json" | string | `"{\n  // Gateway configuration\n  \"gateway\": {\n    \"port\": 18789,\n    \"mode\": \"local\",\n    \"auth\": {\n      \"token\": \"${OPENCLAW_GATEWAY_TOKEN}\"\n    },\n    \"controlUi\": {\n      \"dangerouslyAllowHostHeaderOriginFallback\": true\n    },\n    // IMPORTANT: trustedProxies uses exact IP matching only\n    // - CIDR notation is NOT supported - list each proxy IP individually\n    // - IPv6 exact addresses may work but are untested\n    // - Recommend single-stack IPv4 deployments for simplicity\n    \"trustedProxies\": [\"10.0.0.1\"]\n  },\n\n  // Models configuration (MiniMax provider)\n  \"models\": {\n    \"mode\": \"merge\",\n    \"providers\": {\n      \"minimax\": {\n        \"baseUrl\": \"https://api.minimax.io/anthropic\",\n        \"apiKey\": \"${MINIMAX_API_KEY}\",\n        \"api\": \"anthropic-messages\",\n        \"models\": [\n          {\n            \"id\": \"MiniMax-M2.5\",\n            \"name\": \"MiniMax M2.5\",\n            \"reasoning\": true,\n            \"input\": [\"text\"],\n            \"cost\": { \"input\": 0.3, \"output\": 1.2, \"cacheRead\": 0.03, \"cacheWrite\": 0.12 },\n            \"contextWindow\": 200000,\n            \"maxTokens\": 8192\n          }\n        ]\n      }\n    }\n  },\n\n  // Browser configuration (Chromium sidecar)\n  \"browser\": {\n    \"enabled\": true,\n    \"defaultProfile\": \"default\",\n    \"profiles\": {\n      \"default\": {\n        \"cdpUrl\": \"http://localhost:9222\",\n        \"color\": \"#4285F4\"\n      }\n    }\n  },\n\n  // Agent configuration\n  \"agents\": {\n    \"defaults\": {\n      \"workspace\": \"/home/node/.openclaw/workspace\",\n      \"model\": {\n        // Uses ANTHROPIC_API_KEY from environment\n        \"primary\": \"minimax/MiniMax-M2.5\"\n      },\n      \"userTimezone\": \"Asia/Ho_Chi_Minh\",\n      \"timeoutSeconds\": 600,\n      \"maxConcurrent\": 1\n    },\n    \"list\": [\n      {\n        \"id\": \"main\",\n        \"default\": true,\n        \"identity\": {\n          \"name\": \"Neo\",\n          \"emoji\": \"🦞\"\n        }\n      }\n    ]\n  },\n\n  // Session management\n  \"session\": {\n    \"scope\": \"per-sender\",\n    \"store\": \"/home/node/.openclaw/sessions\",\n    \"reset\": {\n      \"mode\": \"idle\",\n      \"idleMinutes\": 60\n    }\n  },\n\n  // Logging\n  \"logging\": {\n    \"level\": \"info\",\n    \"consoleLevel\": \"info\",\n    \"consoleStyle\": \"compact\",\n    \"redactSensitive\": \"tools\"\n  },\n\n  // Tools configuration\n  \"tools\": {\n    \"profile\": \"full\",\n    \"media\": {\n      \"audio\": {\n        \"enabled\": true\n      }\n    },\n    \"web\": {\n      \"search\": {\n        \"enabled\": true\n      },\n      \"fetch\": {\n        \"enabled\": true\n      }\n    }\n  },\n\n  // Channel configuration can be added here:\n  \"channels\": {\n    \"telegram\": {\n      \"botToken\": \"${TELEGRAM_BOT_TOKEN}\",\n      \"allowFrom\": [\"${TELEGRAM_ALLOW_FROM}\"],\n      \"enabled\": true\n    }\n  }\n}\n"` |  |
 | app-template.configMaps.config.data.bash_aliases | string | `"alias openclaw='node /app/dist/index.js'\n"` |  |
 | app-template.configMaps.config.enabled | bool | `true` |  |
